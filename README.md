@@ -19,7 +19,7 @@
 
 
 
-This is a DIY project that converts a rubber dome membrane keyboard Sun Type 5c into a modern keyboard keyboard with VIAL keymapping, NKRO, and as well as USB C connectivity. This project aims to provide an afforable and straightforward solution to restore a Sun Type 5c to those with amateur electronics background (me included). The process involves creating a comepletely new keyboard matrix from scratch, and wiring each keys with diodes, as well as coding the QMK firmware and porting it to the Raspberry Pi Pico. 
+This is a DIY project that converts a rubber dome membrane keyboard Sun Type 5c into a modern keyboard keyboard with VIAL keymapping, NKRO, and as well as USB C connectivity. This project aims to provide an afforable and straightforward solution to restore a Sun Type 5c to those with amateur electronics background (me included). The process involves creating a comepletely new keyboard matrix and keyswitch from scratch, wiring each keys with diodes, as well as coding the QMK firmware and porting it to the Raspberry Pi Pico. 
 
 ## Background
 The Sun Type 5c is a keyboard that was designed by Sun Microsystems and manufactured by Fujitsu for the Sun Sparcstation between 1991 to 1997. It uses a rubber dome over membrane with discrete sliders as actuators. The keyboard is typically more well built than other Fujitsu Keyboards which uses higher quality and much better designed rubber dome sheets, solid chassis construction, and as well as thick PBT keycaps for most of its keys. The additional keys on the left in constrast to a tranditional full size keyboard has led to the Sun Type 5c being one of the physically longer and larger keyboards, with a total of 119 keys.
