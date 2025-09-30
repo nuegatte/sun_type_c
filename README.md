@@ -214,7 +214,72 @@ Matrix design basics :
   - This discipline may fall under the practise of PCB design
   - However, due to technological constraints, the entirety of the matrix is handwired.
   - Such tradeoffs may be countered with the usage of enameled wires to ensure flexible circuit design and required insulation.
+- The number of usable GPIOs on your selected microcontroller limits the number of columns and rows in your keyboard matrix.
 
+### Understanding the layout
+[content]
+
+### Initial and Final design 
+[content]
+
+### Tabulated form
+[content]
+
+
+_______________
+
+## Wiring columns and rows
+
+[content]
+- col2row
+- explain diode placements
+
+### Pinout to Microcontroller
+
+### Wiring indicator LEDs
+
+_______________
+
+## Firmware
+- keyboard layout editor
+- basic vial setup
+- matrix setup
+- compiling firmware (directory and whatnots)
+- flashing firmware
+
+
+## Challenges and limitations
+
+### Challenges
+ - actuating mechanism from scratch
+   - most time consuming part, due to intense testing
+ - matrix design
+   - due to pin constraints
+ - diode placements
+   - most challenging part, due to limited space
+ - soldering on a membrane
+   - heat control 
+ - wiring method
+   - copper pen was initially used
+   - abandoned due to high resistance
+   - enamel wire instead
+ - short circuiting
+   - excess flux not cleaned up
+   - lack of insulation
+    - nail polish
+ - bad soldered joints
+   - resoldering  
+ - bad contact pads
+   - only fixed to place w/ tape
+   - under the assumption of easy-to-replace foil pads for easy repair
+   - only to be a conductivity issue
+   - directly soldering
+   - clean excess flux to prevent short circuit
+
+ ### Limitations
+ - 16 macros only
+ - No BT
+   
 
 
 
