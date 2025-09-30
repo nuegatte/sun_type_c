@@ -1,1 +1,38 @@
 # sun_type_c
+
+## Introduction
+
+<img width="500"  alt="image" src="https://github.com/user-attachments/assets/5300cf41-55b2-48e2-9f9b-4db87107182b" /><img width="500" alt="image" src="https://github.com/user-attachments/assets/a971bd1e-8f9d-4b8d-a9b6-68ef88e31ab1" /><img width="311" height="287" alt="image" src="https://github.com/user-attachments/assets/d9ef1935-2c95-499a-b258-cb8863c3e990" /><img width="600" alt="image" src="https://github.com/user-attachments/assets/a8159745-b2f3-49a6-b5fc-ac1beba5fc3a" />
+
+
+
+
+This is a project that converts a rubber dome membrane keyboard Sun Type 5c into a modern keyboard keyboard with VIAL keymapping, NKRO, and as well as USB C connectivity. The process involves creating a comepletely new keyboard matrix from scratch, and wiring each keys with diodes, as well as coding the QMK firmware and porting it to the Raspberry Pi Pico. 
+
+## Background
+The Sun Type 5c is a keyboard that was designed by Sun Microsystems and manufactured by Fujitsu for the Sun Sparcstation between 1991 to 1997. It uses a rubber dome over membrane with discrete sliders as actuators. The keyboard is typically more well built than other Fujitsu Keyboards which uses higher quality and much better designed rubber dome sheets, solid chassis construction, and as well as thick PBT keycaps for most of its keys. 
+
+### Why does it matter?
+
+
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/bb92e890-1d9a-486c-a324-d867366f18ea" />
+<img   height="200" alt="image" src="https://github.com/user-attachments/assets/96e3ab91-8132-4199-bf66-5b5d03d6d229" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/c5fc3cec-33ff-49d0-b289-06b909a17179" />
+
+
+
+The Unix version of Sun Type 5c is rather significant in the face of modern keyboards as its layout laid the foundation of the Happy Hacking Keyboard's (HHKB) layout, which is favored by many keyboard enthusiasts and the likes of programmers as well due to its unique but well thought out key placements. 
+
+For someone who owns a HHKB and favors full sized keyboards, the Sun Type 5c seems like an ideal choice for my daily usage. However, getting it to work may not be that simple.
+
+
+## Problem Statement
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/48235314-45c7-4c55-ba33-5bb866324295" />
+
+As a legacy device, the Sun Type 5c uses a proprietary protocol that is only compatible with Sun Systems, and its 8-pin mini-DIN connector is incompatible with the more common PS/2 ones.
+
+<img  height="280" alt="image" src="https://github.com/user-attachments/assets/5352a48e-91a1-4bb9-8fa9-f806d98cd10f" />
+
+Athough building a TMK converter with an Arduino Pro Micro is a common solution, my Sun Type 5c arrived without its cable connector, leaving the controller pinouts even more ambiguous. After countless attempts to test pinouts and search of detailed documentation on this keyboard's stock controller, creating a simple converter was not feasible. 
+
+Even if the such a converter is successful, common issues like 2KRO, lack of proper key overtravel would occur due to the nature of rubber dome membrane mechanisms. Subjective drawbacks like mushy keyfeel also prevents the project from achieving the intended results.
