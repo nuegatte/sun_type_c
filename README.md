@@ -22,7 +22,7 @@
 This is a DIY project that converts a rubber dome membrane keyboard Sun Type 5c into a modern keyboard keyboard with VIAL keymapping, NKRO, and as well as USB C connectivity. This project aims to provide an afforable and straightforward solution to restore a Sun Type 5c to those with amateur electronics background (me included). The process involves creating a comepletely new keyboard matrix from scratch, and wiring each keys with diodes, as well as coding the QMK firmware and porting it to the Raspberry Pi Pico. 
 
 ## Background
-The Sun Type 5c is a keyboard that was designed by Sun Microsystems and manufactured by Fujitsu for the Sun Sparcstation between 1991 to 1997. It uses a rubber dome over membrane with discrete sliders as actuators. The keyboard is typically more well built than other Fujitsu Keyboards which uses higher quality and much better designed rubber dome sheets, solid chassis construction, and as well as thick PBT keycaps for most of its keys. 
+The Sun Type 5c is a keyboard that was designed by Sun Microsystems and manufactured by Fujitsu for the Sun Sparcstation between 1991 to 1997. It uses a rubber dome over membrane with discrete sliders as actuators. The keyboard is typically more well built than other Fujitsu Keyboards which uses higher quality and much better designed rubber dome sheets, solid chassis construction, and as well as thick PBT keycaps for most of its keys. The additional keys on the left in constrast to a tranditional full size keyboard has led to the Sun Type 5c being one of the physically longer and larger keyboards, with a total of 119 keys.
 
 ### Why does it matter?
 
@@ -33,7 +33,7 @@ The Sun Type 5c is a keyboard that was designed by Sun Microsystems and manufact
 
 
 
-The **Unix version** of Sun Type 5c is rather significant in the face of modern keyboards as its layout laid the foundation of the **Happy Hacking Keyboard's (HHKB)** layout, which is favored by many keyboard enthusiasts and the likes of programmers as well due to its unique but well thought out key placements. 
+The **Unix version** of Sun Type 5c is rather significant in the face of modern keyboards as its layout laid the foundation of the **Happy Hacking Keyboard's (HHKB)** layout next to the Apple M0110, which is favored by many keyboard enthusiasts and the likes of programmers as well due to its unique but well thought out key placements. 
 
 For someone who owns a HHKB and favors full sized keyboards, the Sun Type 5c seems like an ideal choice for my daily usage. However, getting it to work may not be that simple.
 
@@ -65,14 +65,15 @@ This project also does not cover detailed overview on the keyboard itself.
 ## Tools and Materials 
 This section discusses tools and materials used and the reasoning behind it.
 
+
 ### Tools Involved
 - Soldering tools
   - For soldering components   
 - QMK Toolbox, VIAL
   - For building and compiling firmware
   - [Proper VIAL setup video by Joe Scotto, this helps. A LOT.](https://www.youtube.com/watch?v=O8pdUPqPG3k)
-- C, JSON
-  - For coding matrix layout and QMK firmware
+- C language, JSON
+  - For configurating matrix layout and coding QMK firmware
 - Multimeter, Ruler, Cutting Knife, Wire Cutter, Tweezers
   - For measuring, cutting and arranging components
 
@@ -111,4 +112,95 @@ This section discusses tools and materials used and the reasoning behind it.
   - <img height="80" alt="image" src="https://github.com/user-attachments/assets/94d8a425-2f70-451d-83ba-8819354200f2" />
   -  Preserves lifespan of the original Pi Pico's USB-C port
   - Allows modularity between cable repair/chip repair routines
-    
+- Clear nail polish
+
+## Project Flow
+1. [Improving key feel](#improving-key-feel)  
+2. [Creating a reliable actuating mechanism](#creating-a-reliable-actuating-mechanism)  
+3. [Designing matrix](#designing-matrix)  
+4. [Wiring columns and Rows](#wiring-columns-and-rows)  
+5. [Firmware](#firmware)  
+6. [Test](#test)  
+
+
+### Improving key feel
+
+<img height="130" alt="image" src="https://github.com/user-attachments/assets/e07fa357-e861-4e50-9cae-0365739f0f08" />
+<img height="130" alt="image" src="https://github.com/user-attachments/assets/8ffa866c-b7b6-42a7-84c1-5d809d6f0a92" />
+
+
+Just like any other rubber dome over membrane keyboard, the Sun Type 5c's rubber dome are of a dome shaped cone with a protrusion on the underside. While this ensures enough pressure is applied to complete the circuit, drawbacks like mushy key feel may contribute to subjective discomforts when typing. 
+
+#### **The solution? Trim the bump off!**
+<img  height="200" alt="image" src="https://github.com/user-attachments/assets/16f16d81-d5cb-4509-b161-bb75887440dd" />
+
+With the help of a wire cutter, the underside bump is trimmed off for every domes (Example on the image above). The result key feel yielded longer key travel, stronger tactility, and vastly reduced mushiness. In addition to the opaque rubber domes used in constrast to translucent silicone domes used in modern counterparts like the Sun Type 7, the structure of the domes itself is already much stiffer, contributing to the solid bottom out. However, it is unclear whether the color and materials affect the overall tactility of the rubber domes in this case, so take that statement with grain of salt.
+
+
+### Creating a reliable actuating mechanism
+Before matrix design, it is important to create a reliable actuating mechanism to ensure the enhanced key feel does not go in vain. Moreover, this actuating mechanism is also aimed to emulate the standard mechanical keyboard's nature that allows for key overtravel, which is the tendency of a switch to actuate when pressed halfway.  
+
+Before getting started, certain questions may have already been raised:  
+
+1. Why don’t you just utilise the membrane traces and directly rewire it to your liking?  
+    - The Sun Type 7's membrane traces operate through sandwiching a hole-punched spacing membrane in between the column and row membrane.  
+      <img height="190" alt="image" src="https://github.com/user-attachments/assets/fcb03604-acc0-4f48-accc-309909035f8f" /><img height="190" alt="image" src="https://github.com/user-attachments/assets/51f83a9e-d980-4dbf-a8e8-fffca29f7017" />  
+    - While it is easier to directly rewire the matrix like so, it would be impractical to fit dozens of SMD diodes in between the membrane.  
+    - Moreover, the lack of underside bumps from the modded rubber domes does not provide sufficient pressure to register keys.  
+
+2. How do you ensure the reliability of this mechanism created from ground up?  
+    - Concerns like oxidation, aging and mechanical wear are expected.  
+    - Most static traces will be coated in clear nail polish to ensure maximum airtight seal.  
+    - Not only that, the proposed mechanisms will also be stress tested for at least 5 minutes to ensure reliability and ideal key feel is achieved without compromising the original key feel.  
+      - Due to the lack of key switch stress testing machine, 5 minutes will be the maximum time used.  
+
+The next section discusses the proposed mechanism for actuating key switches. While the methods are different, the premise remains the same:  
+- All of the column and row traces will be constructed onto a single membrane layer, which is on top of the topmost membrane.  
+- The traces are of exposed copper foil tapes, requiring a conductive agent to close the circuits to register keys.  
+  <img width="593" height="420" alt="image" src="https://github.com/user-attachments/assets/fd5154bc-4134-4490-bd17-8de2c33d0d8f" />  
+- The purpose of the proposed mechanism is to simply connect the circuits in the most efficient way.  
+- Proposed mechanisms will be discussed, and why they are not suited as the final design.  
+
+#### *Proposed Solution*
+
+**Conductive pads (Rejected)**
+
+<img width="396" height="213" alt="image" src="https://github.com/user-attachments/assets/303c1a0b-eb26-48e6-bce2-c23979267ff5" />
+
+- The initial solution was to attach conductive pads to the underside of the domes.
+- However, due to the cohesive nature of the dome sheets, gluing conductive pads may not be a viable solution.
+- Using safer silicone based glues proved futile as conductive pads came loose from stress tests.
+- Using cyanacrylate based adhesives (super glue) may badly alter key feel, as well as deteriotating the molecular structure of the dome sheet.
+- Not only that, full key press is required for actuation, making key overtravel impossible.
+- Varied pad placements caused inconsistencies in key actuation.
+- Hence, this option is abandoned.
+
+
+**Topre capacitive springs (Rejected)**
+
+<img  height="200" alt="image" src="https://github.com/user-attachments/assets/0f4bb781-37fa-48ac-8479-27cf6cd058c4" />
+<img  height="200" alt="image" src="https://github.com/user-attachments/assets/884113d8-4cc7-4df4-9a41-2eac673d8874" />
+
+
+- This solution utilised a trimmed Topre capactivie spring that precisely fit the rubber dome's dimension.
+- Rather than capacitive sensing, this remains an electrical contact mechanism.
+- The goal is to perform actuation through conducting the circuit with the collapse of the metal spring.
+- The results yielded impressive key overtravel and solid bottom out.
+- Despite initial success, stress tests proved that this solution requires precise spring trimming and placements to prevent short circuits.
+- Moreover, the spring greatly obstructs key feel as it introduces unnnecessary padding that reduces tactility.
+- Hence, this option is abandoned.
+
+**DIY copper foil actuator (Approved)**
+
+<img  height="200" alt="image" src="https://github.com/user-attachments/assets/e974330c-068b-46c3-93e2-ca634987672b" /> 
+<img  height="200" alt="image" src="https://github.com/user-attachments/assets/8854e82a-4e5f-4fcd-8898-6d2805f40af5" />
+ 
+
+- Inspired by Fujitsu's leaf spring mechanical switches, this copper foil actuator design uses a single side conductive copper foil soldered directly onto the row circuit pads.
+<img   height="200" alt="image" src="https://github.com/user-attachments/assets/b65c2627-ea8d-4775-bb28-d2960e4197d1" />
+<img   height="200" alt="image" src="https://github.com/user-attachments/assets/b1d154f9-01d1-4ed0-ad85-15ca00ab5be5" />
+
+- The copper foil actuator is a non sticky single sided conductive pad constructed by sticking the adhesive side of both copper and kapton tape, which is then trim 
+
+
+
