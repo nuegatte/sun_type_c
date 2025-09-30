@@ -1,14 +1,6 @@
 # sun_type_c
 
-## Table of Contents
-- [Introduction](#introduction)
-- [Background](#background)
-  - [Why does it matter?](#why-does-it-matter)
-- [Problem Statement](#problem-statement)
-- [Project Scope](#project-scope)
-- [Tools and Materials](#tools-and-materials)
-  - [Tools Involved](#tools-involved)
-  - [Materials Involved](#materials-involved)
+ 
 
 
 
