@@ -1,5 +1,17 @@
 # sun_type_c
 
+## Table of Contents
+- [Introduction](#introduction)
+- [Background](#background)
+  - [Why does it matter?](#why-does-it-matter)
+- [Problem Statement](#problem-statement)
+- [Project Scope](#project-scope)
+- [Tools and Materials](#tools-and-materials)
+  - [Tools Involved](#tools-involved)
+  - [Materials Involved](#materials-involved)
+
+
+
 ## Introduction
 
 <img width="500"  alt="image" src="https://github.com/user-attachments/assets/5300cf41-55b2-48e2-9f9b-4db87107182b" /><img width="500" alt="image" src="https://github.com/user-attachments/assets/a971bd1e-8f9d-4b8d-a9b6-68ef88e31ab1" /><img width="311" height="287" alt="image" src="https://github.com/user-attachments/assets/d9ef1935-2c95-499a-b258-cb8863c3e990" /><img width="600" alt="image" src="https://github.com/user-attachments/assets/a8159745-b2f3-49a6-b5fc-ac1beba5fc3a" />
@@ -7,7 +19,7 @@
 
 
 
-This is a project that converts a rubber dome membrane keyboard Sun Type 5c into a modern keyboard keyboard with VIAL keymapping, NKRO, and as well as USB C connectivity. The process involves creating a comepletely new keyboard matrix from scratch, and wiring each keys with diodes, as well as coding the QMK firmware and porting it to the Raspberry Pi Pico. 
+This is a DIY project that converts a rubber dome membrane keyboard Sun Type 5c into a modern keyboard keyboard with VIAL keymapping, NKRO, and as well as USB C connectivity. This project aims to provide an afforable and straightforward solution to restore a Sun Type 5c to those with amateur electronics background (me included). The process involves creating a comepletely new keyboard matrix from scratch, and wiring each keys with diodes, as well as coding the QMK firmware and porting it to the Raspberry Pi Pico. 
 
 ## Background
 The Sun Type 5c is a keyboard that was designed by Sun Microsystems and manufactured by Fujitsu for the Sun Sparcstation between 1991 to 1997. It uses a rubber dome over membrane with discrete sliders as actuators. The keyboard is typically more well built than other Fujitsu Keyboards which uses higher quality and much better designed rubber dome sheets, solid chassis construction, and as well as thick PBT keycaps for most of its keys. 
@@ -50,6 +62,7 @@ The scope of the project includes the following :
 This project does not cover how QMK entirely works, but it will include the steps to get the firmware flashed into the Pi Pico.
 
 ## Tools and Materials 
+This section discusses tools and materials used and the reasoning behind it.
 
 ### Tools Involved
 - Soldering tools
@@ -63,20 +76,37 @@ This project does not cover how QMK entirely works, but it will include the step
   - For measuring, cutting and arranging components
 
 ### Materials involved
+
+
 - 5mm, 10mm copper tape w/ conductive adhesive
+  -  <img height="50" alt="image" src="https://github.com/user-attachments/assets/20b9be9d-349d-46d0-b40a-d578d7c2a318" />
   - For Matrix wiring, as well as copper foil actuator
+
+ 
+
 - Kapton tape
-  - Basic insulation purposes
+  - <img   height="50" alt="image" src="https://github.com/user-attachments/assets/b1499819-00ec-4ab1-a901-ef3b33149d7f" />
+  -  Basic insulation purposes
+ 
+
+- [1N4148 Series SMD Diode (SOD-523)](https://my.mouser.com/c/semiconductors/discrete-semiconductors/diodes-rectifiers/?mounting%20style=SMD%2FSMT&series=1N4148)
+  - <img height="50" alt="image" src="https://github.com/user-attachments/assets/4326e5fd-5dcd-442c-819d-58d29b3b8e1c" />
+  - For NKRO implementation
+  - Compact size that fits between cramped spaces of the keyboard
+  - Directly soldered onto the keyboard membrane.    
 - 1k Ohm resistor
   - For indicator LEDs 
-- 0.05mm, 0.1mm enameled copper wire 
+- 0.05mm, 0.1mm enameled copper wire
+  - <img   height="50" alt="image" src="https://github.com/user-attachments/assets/d8520e5f-dcb1-43f3-b7bd-a36468a461be" />
   - For wiring row to diode wiring, as well as wiring to controller
   - Fits cramped spaces between keyboard parts
-- Raspberry Pi Pico RP2040
+- Raspberry Pi Pico RP2040 (USB-C version)
+  - <img height="50" alt="image" src="https://github.com/user-attachments/assets/3f5a9160-0dfb-42ba-aedd-c7e3615e5c47" />
   - Most convenient flashing method (Drag and Drop)
   - Sufficient number of usable GPIOs for full size keyboard (26 GPIOs)
   - USB-C detachable
 - 20cm USB-C extension cable (Female to Male)
-  - Preserves lifespan of the original Pi Pico's USB-C port
+  - <img height="80" alt="image" src="https://github.com/user-attachments/assets/94d8a425-2f70-451d-83ba-8819354200f2" />
+  -  Preserves lifespan of the original Pi Pico's USB-C port
   - Allows modularity between cable repair/chip repair routines
-  - 
+    
