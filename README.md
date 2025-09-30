@@ -100,6 +100,7 @@ This section discusses tools and materials used and the reasoning behind it.
 - 0.05mm, 0.1mm enameled copper wire
   - <img   height="50" alt="image" src="https://github.com/user-attachments/assets/d8520e5f-dcb1-43f3-b7bd-a36468a461be" />
   - For wiring row to diode wiring, as well as wiring to controller
+  - Pre-insulated, only conductive on tinned parts.
   - Fits cramped spaces between keyboard parts
 - Raspberry Pi Pico RP2040 (USB-C version)
   - <img height="50" alt="image" src="https://github.com/user-attachments/assets/3f5a9160-0dfb-42ba-aedd-c7e3615e5c47" />
