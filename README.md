@@ -21,7 +21,7 @@ The Sun Type 5c is a keyboard that was designed by Sun Microsystems and manufact
 
 
 
-The Unix version of Sun Type 5c is rather significant in the face of modern keyboards as its layout laid the foundation of the Happy Hacking Keyboard's (HHKB) layout, which is favored by many keyboard enthusiasts and the likes of programmers as well due to its unique but well thought out key placements. 
+The **Unix version** of Sun Type 5c is rather significant in the face of modern keyboards as its layout laid the foundation of the **Happy Hacking Keyboard's (HHKB)** layout, which is favored by many keyboard enthusiasts and the likes of programmers as well due to its unique but well thought out key placements. 
 
 For someone who owns a HHKB and favors full sized keyboards, the Sun Type 5c seems like an ideal choice for my daily usage. However, getting it to work may not be that simple.
 
@@ -35,4 +35,48 @@ As a legacy device, the Sun Type 5c uses a proprietary protocol that is only com
 
 Athough building a TMK converter with an Arduino Pro Micro is a common solution, my Sun Type 5c arrived without its cable connector, leaving the controller pinouts even more ambiguous. After countless attempts to test pinouts and search of detailed documentation on this keyboard's stock controller, creating a simple converter was not feasible. 
 
-Even if the such a converter is successful, common issues like 2KRO, lack of proper key overtravel would occur due to the nature of rubber dome membrane mechanisms. Subjective drawbacks like mushy keyfeel also prevents the project from achieving the intended results.
+Even if the such a converter is successful, common issues like 2KRO, lack of proper key overtravel would occur due to the nature of rubber dome membrane mechanisms. Not only that, TMK firmware requires reflashing the firmware when it comes to remapping the keys, despite supporting 8 remappable layers at once. Subjective drawbacks like mushy keyfeel also prevents the project from achieving the intended results. 
+
+## Project Scope
+The scope of the project includes the following : 
+- A USB-C compatible Sun Type 5c, addressed as 'Sun Type C' from now on
+- Creating a keyboard matrix from scratch that supports full NKRO (N-Key rollover)
+- Supports QMK, VIAL for remapping on the fly
+- Runs on Raspberry Pi Pico RP2040
+- Up to 10 layers for remappability, as well as 36 macros.
+- Improved rubber dome key feel (Less mushiness, better overtravel, etc.)
+- Challenges and limitations faced in this project
+
+This project does not cover how QMK entirely works, but it will include the steps to get the firmware flashed into the Pi Pico.
+
+## Tools and Materials 
+
+### Tools Involved
+- Soldering tools
+  - For soldering components   
+- QMK Toolbox, VIAL
+  - For building and compiling firmware
+  - [Proper VIAL setup video by Joe Scotto, this helps. A LOT.](https://www.youtube.com/watch?v=O8pdUPqPG3k)
+- C, JSON
+  - For coding matrix layout and QMK firmware
+- Multimeter, Ruler, Cutting Knife, Wire Cutter, Tweezers
+  - For measuring, cutting and arranging components
+
+### Materials involved
+- 5mm, 10mm copper tape w/ conductive adhesive
+  - For Matrix wiring, as well as copper foil actuator
+- Kapton tape
+  - Basic insulation purposes
+- 1k Ohm resistor
+  - For indicator LEDs 
+- 0.05mm, 0.1mm enameled copper wire 
+  - For wiring row to diode wiring, as well as wiring to controller
+  - Fits cramped spaces between keyboard parts
+- Raspberry Pi Pico RP2040
+  - Most convenient flashing method (Drag and Drop)
+  - Sufficient number of usable GPIOs for full size keyboard (26 GPIOs)
+  - USB-C detachable
+- 20cm USB-C extension cable (Female to Male)
+  - Preserves lifespan of the original Pi Pico's USB-C port
+  - Allows modularity between cable repair/chip repair routines
+  - 
