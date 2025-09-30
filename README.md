@@ -200,7 +200,17 @@ The next section discusses the proposed mechanism for actuating key switches. Wh
 <img   height="200" alt="image" src="https://github.com/user-attachments/assets/b65c2627-ea8d-4775-bb28-d2960e4197d1" />
 <img   height="200" alt="image" src="https://github.com/user-attachments/assets/b1d154f9-01d1-4ed0-ad85-15ca00ab5be5" />
 
-- The copper foil actuator is a non sticky single sided conductive pad constructed by sticking the adhesive side of both copper and kapton tape, which is then trim 
+- The copper foil actuator is a non sticky single sided conductive pad constructed by sticking the adhesive side of both copper and kapton tape together, which is then trimmed and folded according to the illustration below :
+  - <img width="300"   alt="image" src="https://github.com/user-attachments/assets/764e0d61-a588-40f9-82ed-ecb9d148487e" />
+  - <img width="300"   alt="image" src="https://github.com/user-attachments/assets/cf1e7763-5261-4f1b-b055-91316b410c08" />
+  - <img width="300" alt="image" src="https://github.com/user-attachments/assets/fbc5f19c-ee46-44a2-927f-18d225388885" />
+
+- Measurements in the illustration are recommended ones, off centered measurements due to size and precision constraints may be omited as long as the differences are small.
+- The result lead to decent key overtravel, and stress tests are passed
+- Not only that, the key feel is virtually unaffected as the foil pads are thin enough to neglect any potential tactility reduction.
+  
+
+
 
 
 
