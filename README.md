@@ -48,7 +48,7 @@ As a legacy device, the Sun Type 5c uses a proprietary protocol that is only com
 Athough building a TMK converter with an Arduino Pro Micro is a common solution, my Sun Type 5c arrived without its cable connector, leaving the controller pinouts even more ambiguous. After countless attempts to test pinouts and search of detailed documentation on this keyboard's stock controller, creating a simple converter was not feasible. 
 
 Even if the such a converter is successful, common issues like 2KRO, lack of proper key overtravel would occur due to the nature of rubber dome membrane mechanisms. Not only that, TMK firmware requires reflashing the firmware when it comes to remapping the keys, despite supporting 8 remappable layers at once. Subjective drawbacks like mushy keyfeel also prevents the project from achieving the intended results. 
-
+ 
 ## Project Scope
 The scope of the project includes the following : 
 - A USB-C compatible Sun Type 5c, addressed as 'Sun Type C' from now on
@@ -61,11 +61,11 @@ The scope of the project includes the following :
 
 This project does not cover how QMK entirely works, but it will include the steps to get the firmware flashed into the Pi Pico.
 This project also does not cover detailed overview on the keyboard itself.
-
+ 
 ## Tools and Materials 
 This section discusses tools and materials used and the reasoning behind it.
 
-
+ 
 ### Tools Involved
 - Soldering tools
   - For soldering components   
@@ -76,7 +76,7 @@ This section discusses tools and materials used and the reasoning behind it.
   - For configurating matrix layout and coding QMK firmware
 - Multimeter, Ruler, Cutting Knife, Wire Cutter, Tweezers
   - For measuring, cutting and arranging components
-
+ 
 ### Materials involved
 
 
@@ -113,7 +113,7 @@ This section discusses tools and materials used and the reasoning behind it.
   -  Preserves lifespan of the original Pi Pico's USB-C port
   - Allows modularity between cable repair/chip repair routines
 - Clear nail polish
-
+ 
 ## Project Flow
 1. [Improving key feel](#improving-key-feel)  
 2. [Creating a reliable actuating mechanism](#creating-a-reliable-actuating-mechanism)  
@@ -121,8 +121,7 @@ This section discusses tools and materials used and the reasoning behind it.
 4. [Wiring columns and Rows](#wiring-columns-and-rows)  
 5. [Firmware](#firmware)  
 6. [Test](#test)  
-
-
+ 
 ### Improving key feel
 
 <img height="130" alt="image" src="https://github.com/user-attachments/assets/e07fa357-e861-4e50-9cae-0365739f0f08" />
@@ -135,11 +134,10 @@ Just like any other rubber dome over membrane keyboard, the Sun Type 5c's rubber
 <img  height="200" alt="image" src="https://github.com/user-attachments/assets/16f16d81-d5cb-4509-b161-bb75887440dd" />
 
 With the help of a wire cutter, the underside bump is trimmed off for every domes (Example on the image above). The result key feel yielded longer key travel, stronger tactility, and vastly reduced mushiness. In addition to the opaque rubber domes used in constrast to translucent silicone domes used in modern counterparts like the Sun Type 7, the structure of the domes itself is already much stiffer, contributing to the solid bottom out. However, it is unclear whether the color and materials affect the overall tactility of the rubber domes in this case, so take that statement with grain of salt.
-
-
+ ______________
 ### Creating a reliable actuating mechanism
 Before matrix design, it is important to create a reliable actuating mechanism to ensure the enhanced key feel does not go in vain. Moreover, this actuating mechanism is also aimed to emulate the standard mechanical keyboard's nature that allows for key overtravel, which is the tendency of a switch to actuate when pressed halfway.  
-
+ 
 Before getting started, certain questions may have already been raised:  
 
 1. Why don’t you just utilise the membrane traces and directly rewire it to your liking?  
@@ -160,9 +158,9 @@ The next section discusses the proposed mechanism for actuating key switches. Wh
   <img width="593" height="420" alt="image" src="https://github.com/user-attachments/assets/fd5154bc-4134-4490-bd17-8de2c33d0d8f" />  
 - The purpose of the proposed mechanism is to simply connect the circuits in the most efficient way.  
 - Proposed mechanisms will be discussed, and why they are not suited as the final design.  
-
+______________
 #### *Proposed Solution*
-
+______________
 **Conductive pads (Rejected)**
 
 <img width="396" height="213" alt="image" src="https://github.com/user-attachments/assets/303c1a0b-eb26-48e6-bce2-c23979267ff5" />
@@ -174,7 +172,7 @@ The next section discusses the proposed mechanism for actuating key switches. Wh
 - Not only that, full key press is required for actuation, making key overtravel impossible.
 - Varied pad placements caused inconsistencies in key actuation.
 - Hence, this option is abandoned.
-
+______________
 
 **Topre capacitive springs (Rejected)**
 
@@ -189,6 +187,7 @@ The next section discusses the proposed mechanism for actuating key switches. Wh
 - Despite initial success, stress tests proved that this solution requires precise spring trimming and placements to prevent short circuits.
 - Moreover, the spring greatly obstructs key feel as it introduces unnnecessary padding that reduces tactility.
 - Hence, this option is abandoned.
+______________
 
 **DIY copper foil actuator (Approved)**
 
@@ -204,11 +203,25 @@ The next section discusses the proposed mechanism for actuating key switches. Wh
   - <img width="300"   alt="image" src="https://github.com/user-attachments/assets/764e0d61-a588-40f9-82ed-ecb9d148487e" />
   - <img width="300"   alt="image" src="https://github.com/user-attachments/assets/cf1e7763-5261-4f1b-b055-91316b410c08" />
   - <img width="300" alt="image" src="https://github.com/user-attachments/assets/fbc5f19c-ee46-44a2-927f-18d225388885" />
-
 - Measurements in the illustration are recommended ones, off centered measurements due to size and precision constraints may be omited as long as the differences are small.
-- The result lead to decent key overtravel, and stress tests are passed
+- The result lead to decent key overtravel, and stress tests are passed.
 - Not only that, the key feel is virtually unaffected as the foil pads are thin enough to neglect any potential tactility reduction.
-  
+- Hence, this option is approved.
+- The only caveat is that 119 of the same foil pads are required to make this project possible, and creating extras are recommended due to its small size.
+
+______________
+
+## Designing matrix
+
+Matrix design basics :
+- There are column pins and row pins
+- Both of them combine altogether to form a grid of key combinations
+- The shape of the physical matrix is not determined by its tabulated counterpart:
+  - You can have a 12 by 12 matrix grid and let it share the physicial form factor of a full size keyboard
+  - That is if you can configure the traces from column to row to diodes (if any) efficiently.
+  - This discipline may fall under the practise of PCB design
+  - However, due to technological constraints, the entirety of the matrix is handwired.
+  - Such tradeoffs may be countered with the usage of enameled wires to ensure flexible circuit design and required insulation.
 
 
 
