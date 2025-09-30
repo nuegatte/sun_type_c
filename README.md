@@ -60,6 +60,7 @@ The scope of the project includes the following :
 - Challenges and limitations faced in this project
 
 This project does not cover how QMK entirely works, but it will include the steps to get the firmware flashed into the Pi Pico.
+This project also does not cover detailed overview on the keyboard itself.
 
 ## Tools and Materials 
 This section discusses tools and materials used and the reasoning behind it.
