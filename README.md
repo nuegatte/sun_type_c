@@ -209,28 +209,71 @@ Matrix design basics :
 - There are column pins and row pins
 - Both of them combine altogether to form a grid of key combinations
 - The shape of the physical matrix is not determined by its tabulated counterpart:
-  - You can have a 12 by 12 matrix grid and let it share the physicial form factor of a full size keyboard
+  - You can have a 12 by 12 matrix grid and let it share the physicial form factor of a full size keyboard/
   - That is if you can configure the traces from column to row to diodes (if any) efficiently.
   - This discipline may fall under the practise of PCB design
   - However, due to technological constraints, the entirety of the matrix is handwired.
   - Such tradeoffs may be countered with the usage of enameled wires to ensure flexible circuit design and required insulation.
 - The number of usable GPIOs on your selected microcontroller limits the number of columns and rows in your keyboard matrix.
 
-### Understanding the layout
-[content]
+ ______________________
 
 ### Initial and Final design 
-[content]
+
+The main objective of the matrix design is to achieve the following : 
+- The combined column, row, LED indicator pinouts do not exceed that of the Raspberry Pi Pico (26 usable GPIOs)
+
+#### **Initial Design**
+<img  height="250" alt="image" src="https://github.com/user-attachments/assets/12173f1b-9895-43af-a54c-6e42490cce39" />
+
+- Direct, straightforward waffle matrix pattern
+- This matrix requires a total of 30 GPIO (24 columns, 6 rows) to function properly, excluding the 3 LED indicator pins
+
+- Pros
+  - Physically tidy matrix layout, easy diode arrangement.
+
+- Cons
+  - Exceeds the number of available GPIOs of the Raspberry Pi Pico (only 26)
+  - Unnecessarily huge matrix grid with many unused grid slots
+    - 24 * 6 = 144 keys
+    - Since the Sun Type C requires only 119 keys, this leaves 25 extra unused keys, deeming it wasteful  
+  - Further planning shows that this layout is not exactly suitable due to the keyboard's build 
+
+__________________________
+#### **Final Design**
+<img  height="250" alt="image" src="https://github.com/user-attachments/assets/4a44695d-da12-4ba9-86b1-a1243d8d5ebb" />
+
+- Features an unconventional physical matrix that is designed with extensive planning
+- The diagram above shows a redesigned matrix that is derived from the initial design
+- For the sake of clear illustration, only columns of the matrix will be displayed based on the diagram above
+- This matrix requires a total of 22 GPIO (11 columns, 11 rows) to function properly, excluding the 3 LED indicator pins
+
+- Pros
+  - Space saving matrix that requires less GPIOs (22 total, 25 if including LED indicators)
+  - Ideal for implementation onto Raspberry Pi Pico
+   
+
+- Cons
+  - Confusing to code with, but still applicable
+
 
 ### Tabulated form
-[content]
+<img  height="250" alt="image" src="https://github.com/user-attachments/assets/4a44695d-da12-4ba9-86b1-a1243d8d5ebb" />
+<img  height="250" alt="image" src="https://github.com/user-attachments/assets/1b53fb11-d81a-4a0c-8a51-ae5d5b8a55bd" />
+
+- The table above shows the corresponding elements of each keys along with their row and column numbers.
+- The red dot marks the first element of each column, which the blue one resembles the second one.
+  - For example, the first element of column 1 based on the matrix diagram corresponding to the table is [Help] (Row 1, Column 1)
+  - Followed by the 2nd element of column 1, which is [M1] (Row 2, Column 1), and so on...
+
+
 
 
 _______________
 
 ## Wiring columns and rows
 
-[content]
+
 - col2row
 - explain diode placements
 
