@@ -53,6 +53,31 @@ The scope of the project includes the following :
 
 This project does not cover how QMK entirely works, but it will include the steps to get the firmware flashed into the Pi Pico.
 This project also does not cover detailed overview on the keyboard itself.
+
+## Understanding the Sun Type 5c
+
+Disclaimer : Due to the lack of images prior modding, post-restoration images are used for references. I apologise in advance for this inconvenience, but I assure this will not affect future references. 
+
+<img width="884" height="337" alt="Screenshot 2025-10-02 at 1 55 27 PM" src="https://github.com/user-attachments/assets/1e532a7e-ece0-4be8-81db-18caeb74a627" />
+
+The Sun Type 5c consists of a tough and thick beige plastic top casing, with its bottom casing held together by only plastic clips.
+
+<img width="483" height="356" alt="Screenshot 2025-10-02 at 1 55 50 PM" src="https://github.com/user-attachments/assets/f251270a-fcd2-4568-83c6-df426df80a4e" />
+<img width="604" height="332" alt="Screenshot 2025-10-02 at 1 56 07 PM" src="https://github.com/user-attachments/assets/1c0c5dfc-a06a-4d2b-995b-ea58c3d536a5" />
+Based on the image above, there are 5 visible tabs and 2 hidden tabs at the bottom side of the keyboard. To open the keyboard, pry open the hidden tab on rightmost/leftmost of the visible tab (refer to the image above), then slowly pry open the remaining ones.
+
+There are also hidden clips at both left & right side of the keyboard case, pry it open the same way the previous hidden tabs are done, followed by pulling in a 90 degree angle. You will most likely hear a snapping sound, and that is normal from the clips on the top of the casing unlatching. Now your sun type 5c is opened.
+
+Opening the case may require prying tools (i.e the back of a tweezer, and a flathead screw driver), and MORE IMPORTANTLY -- patience. 
+
+<img width="329" height="287" alt="Screenshot 2025-10-02 at 1 56 29 PM" src="https://github.com/user-attachments/assets/1beaf300-4702-4586-9efb-3c4e18098916" />
+
+
+Aged, brittle plastics are the biggest enemies of vintage hardwares, and my Sun Type 5c was ultimately a victim of this curse. The plastic tabs that holds the clip on the side of my keyboard's casing snapped off during my first opening attempt. 
+It is advised to refrain from opening the keyboard as much as possible, unless it is required. My best advice is to do everything all at once before final reassembly.
+
+Once opened, you see the internals which is held together in 
+
  
 ## Tools and Materials 
 This section discusses tools and materials used and the reasoning behind it.
