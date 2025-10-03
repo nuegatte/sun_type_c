@@ -43,7 +43,8 @@ Even if the such a converter is successful, common issues like 2KRO, lack of pro
  
 ## Project Scope
 The scope of the project includes the following : 
-- A USB-C compatible Sun Type 5c, addressed as 'Sun Type C' from now on
+- Understanding the internal architecture of the Sun Type 5c
+- A USB-C compatible Sun Type 5c featuring a USB-C female port for connectivity
 - Creating a keyboard matrix from scratch that supports full NKRO (N-Key rollover)
 - Supports QMK, VIAL for remapping on the fly
 - Runs on Raspberry Pi Pico RP2040
@@ -76,7 +77,26 @@ Opening the case may require prying tools (i.e the back of a tweezer, and a flat
 Aged, brittle plastics are the biggest enemies of vintage hardwares, and my Sun Type 5c was ultimately a victim of this curse. The plastic tabs that holds the clip on the side of my keyboard's casing snapped off during my first opening attempt. 
 It is advised to refrain from opening the keyboard as much as possible, unless it is required. My best advice is to do everything all at once before final reassembly.
 
-Once opened, you see the internals which is held together in 
+<img width="700" height="381" alt="Screenshot 2025-10-03 at 4 12 05 PM" src="https://github.com/user-attachments/assets/4690cb48-a425-481a-8bfb-c82ceff8c737" />
+<img width="800" height="530" alt="Sun Type 5 internal architecture" src="https://github.com/user-attachments/assets/89490822-9069-48df-9563-c4951f4f1235" />
+
+Once opened, you see the internals which is held together in one piece. The entire component consists of mainly : 
+- Keycaps/Barrel Plate
+- Rubber Dome Sheet
+- Membrane Sheets
+- Steel Backplate
+
+
+<img   height="350" alt="Sun Type 5c w:o controller" src="https://github.com/user-attachments/assets/6cb2f9f6-d1ec-4e41-bca8-ad0d21b8ae68" />
+<img   height="350" alt="Sun Type 5c w controller" src="https://github.com/user-attachments/assets/f7cc6623-9ea3-4f6a-974b-1ed686a74c34" />
+
+<img  height="200" alt="Screenshot 2025-10-03 at 4 18 25 PM" src="https://github.com/user-attachments/assets/4eb1b90e-73f1-498c-a160-d4fddc71d672" />
+
+
+The back of the steel backplate consists of 31 screws in total, 29 for directly holding the steel plate and barrel plate altogether, and 2 for holding the keyboard controller in place. The membrane narrows down to a extended ribbon cable that plugs directly into a dedicated slot which feeds to the controller. 
+
+
+
 
  
 ## Tools and Materials 
@@ -299,16 +319,52 @@ _______________
 ## Wiring columns and rows
 
 
-- col2row
-- explain diode placements
+<img height="500" alt="Screenshot 2025-10-03 at 5 02 04 PM" src="https://github.com/user-attachments/assets/07e02662-b0cd-4669-88e0-1245c9088bb4" />
 
-### Pinout to Microcontroller
 
-### Wiring indicator LEDs
 
+The columns and rows are wired to the RP2040 based on the diagram above. The wiring sequence is in ascending order of the column/row number. For example, column 1 is soldered to PD0, column 2 to PD1 and all the way to PD10. Followed by row 1 soldered from PD11 and subsequently until PD21. 
+
+ <img width="1000" height="500" alt="LED modding" src="https://github.com/user-attachments/assets/a4b0991c-772d-481e-a4c2-b31322127fb0" />
+
+The LED Indicators are a bit special, you are required to solder a piece of resistor (470 - 1.1k Ohm as the safest option) to limit current flow from the cathode to the GPIOs.  lay a piece of kapton tape on top of the original traces, the lay matching patterns of copper tape over it, followed by soldering new traces to the RP2040 itself.
+
+LED indicators for Scroll Lock, Caps Lock and Num Lock can be found in the keyboard_layout.json
+
+Note : You may solder the GND wires onto a piece of copper tape on an empty space on top of the membrane, then solder another strand of wire directly to a single point of GND. tldr, you can wire every GND of the LED a single GND GPIO. 
+
+-----------------------
+
+This wiring will require you to set "col2row" in your QMK config json file.
+ 
+Wiring the physical matrix required extensive planning as limited spaces calls for unconventional diode placements. 
+
+To make sure that the objective of NKRO is achieved through electrical contacts, the keyboard matrix should have diodes wired to either to columns or rows.
+
+The diodes in this matrix is wired to the rows, which the anode (-) faces the row pads, the cathode (+) to the GPIO.
+
+`[column pad]----(copper foil actuator)----[row pad]-----[ (-) diode (+) ]---------[RP2040 GPIO]`
+
+<img  alt="Screenshot 2025-10-03 at 5 45 33 PM" src="https://github.com/user-attachments/assets/5b289571-ecd6-4371-952c-9aab339a05ae" />
+
+<img  height="225" alt="Screenshot 2025-10-03 at 5 45 11 PM" src="https://github.com/user-attachments/assets/80652808-8782-4a7b-a337-e4d814c070f8" />
+<img   height="255" alt="Screenshot 2025-10-03 at 5 49 22 PM" src="https://github.com/user-attachments/assets/1a3fa4fc-ca69-48dc-818e-46f5a659c2ba" />
+
+Based on the images above, the marked places are of the only free space available. Instead of soldering individual diodes next to each actuators, the diodes are arranged altogether in a single row. Basically, there are 11 strips of 11 diodes arranged altogether in a single row across the free spaces. 
+
+The image below shows the result matrix : 
+
+<img width="719" height="276" alt="Screenshot 2025-10-03 at 6 20 45 PM" src="https://github.com/user-attachments/assets/1216f43a-0519-4bdc-a2fc-b2cf51332f6b" />
+
+
+  
 _______________
 
 ## Firmware
+
+
+
+
 - keyboard layout editor
 - basic vial setup
 - matrix setup
@@ -347,6 +403,17 @@ _______________
  ### Limitations
  - 16 macros only
  - No BT
+
+
+# Conclusion
+<img width="447" height="291" alt="Screenshot 2025-10-03 at 6 21 24 PM" src="https://github.com/user-attachments/assets/ec5294f8-4ff5-47fa-8864-26fd990137b2" />
+
+<img width="561" height="520" alt="Screenshot 2025-10-03 at 6 21 33 PM" src="https://github.com/user-attachments/assets/8f2ba49b-7f1b-49b1-984b-453934d47f73" />
+
+
+I love this keyboard, what else is there to say? This is a straightforward passion project I hope this guide helps or even inspires you to attempt my way of restoration. 
+
+### Thanks for reading.
    
 
 
